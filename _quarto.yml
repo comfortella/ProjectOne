@@ -5,6 +5,7 @@ project:
   
 book: 
   chapters: 
+    - index.qmd
     - Prac_day_1.qmd
     
     

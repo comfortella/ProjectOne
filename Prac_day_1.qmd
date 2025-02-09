@@ -1,5 +1,5 @@
 ---
-title: "PracticalOneQuarto"
+title: "Prac_day_1"
 author: "Comfortella"
 format: html
 ---
@@ -8,7 +8,8 @@ format: html
 ##SetUp
 
 ```{r}
-#|  echo: true
+#| label: load-data
+#| echo: true
 raw_data <- airquality
 
 ```
@@ -16,7 +17,6 @@ raw_data <- airquality
 ##Cleaned Data
 
 ```{r}
-#|  echo: true
 cleaned_data <- na.omit(raw_data)
 tmp <- cleaned_data[[4]]
 tmp
@@ -27,7 +27,6 @@ ozn
 ##Temperature
 
 ```{r}
-#|  echo: true
 mean_tmp <- mean(tmp)
 mean_tmp 
 sd_tmp <- sd(tmp)
@@ -41,7 +40,6 @@ max_tmp
 ##Ozone level
 
 ```{r}
-#|  echo: true
 mean_ozn <- mean(ozn)
 mean_ozn 
 sd_ozn <- sd(ozn)
@@ -57,7 +55,6 @@ max_ozn
 ##SetUp
 
 ```{r}
-#|  echo: true
 data(cars) 
 speed <- cars$speed
 dist <- cars$dist
@@ -66,19 +63,18 @@ dist <- cars$dist
 ##Design Matrix and response variable
 
 ```{r}
-#|  echo: true
 X <- cbind(1,speed) 
 Y<-dist
 ```
 
-\## beta estimate = \[(X^T^\*X)\^-1\]X^T^Y
+##Beta Estimate
 
 ```{r}
-#|  echo: true
+#| label: Beta hat
 Xtrans <- t(X) 
-XtransX <- Xtrans %% X 
+XtransX <- Xtrans %*% X 
 XtransX_inv <- solve(XtransX) 
-XtransY <- Xtrans %% Y 
+XtransY <- Xtrans %*% Y 
 beta_estimate <- XtransX_inv %*% XtransY
 beta_estimate
 ```
@@ -86,7 +82,6 @@ beta_estimate
 ##Linear Model
 
 ```{r}
-#|  echo: true
 model <- lm(dist ~ speed, data=cars) 
 summary(model)
 ```
