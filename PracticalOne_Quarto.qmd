@@ -4,23 +4,81 @@ author: "Comfortella"
 format: html
 ---
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+\
+##SetUp
 
 ```{r}
-1 + 1
+raw_data <- airquality
+
 ```
 
-You can add options to executable code like this
+##Cleaned Data
 
 ```{r}
-#| echo: false
-2 * 2
+ cleaned_data <- na.omit(raw_data)
+tmp <- cleaned_data[[4]]
+tmp
+ozn <- cleaned_data[[1]] 
+ozn
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+##Temperature
+
+```{r}
+mean_tmp <- mean(tmp)
+mean_tmp 
+sd_tmp <- sd(tmp)
+sd_tmp 
+min_tmp <- min(tmp)
+min_tmp
+max_tmp<-max(tmp) 
+max_tmp
+```
+
+##Ozone level
+
+```{r}
+mean_ozn <- mean(ozn)
+mean_ozn 
+sd_ozn <- sd(ozn)
+sd_ozn 
+min_ozn <- min(ozn)
+min_ozn 
+max_ozn <- max(ozn) 
+max_ozn
+```
+
+##Linear Regression
+
+##SetUp
+
+```{r}
+data(cars) 
+speed <- cars$speed
+dist <- cars$dist
+```
+
+##Design Matrix and response variable
+
+```{r}
+X <- cbind(1,speed) 
+Y<-dist
+```
+
+\## beta estimate = \[(X^T^\*X)\^-1\]X^T^Y
+
+```{r}
+Xtrans <- t(X) 
+XtransX <- Xtrans %% X 
+XtransX_inv <- solve(XtransX) 
+XtransY <- Xtrans %% Y 
+beta_estimate <- XtransX_inv %*% XtransY
+beta_estimate
+```
+
+##Linear Model
+
+```{r}
+model <- lm(dist ~ speed, data=cars) 
+summary(model)
+```
