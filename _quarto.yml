@@ -1,5 +1,15 @@
 project:
+  type: book
   title: "ProjectOne"
-
-editor: visual
-
+  output-dir: _output
+  
+book: 
+  chapters: 
+    - ProjectOne.qmd
+    
+    
+website: 
+  navbar:
+    left: 
+      - href: ProjectOne.qmd
+        text: Home
