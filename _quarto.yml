@@ -1,15 +1,15 @@
 project:
   type: book
-  title: "ProjectOne"
-  output-dir: _output
+  title: "Practical One"
+  output-dir: _book
   
 book: 
   chapters: 
-    - ProjectOne.qmd
+    - Prac_day_1.qmd
     
     
 website: 
   navbar:
     left: 
-      - href: ProjectOne.qmd
+      - href: Prac_day_1.qmd
         text: Home
