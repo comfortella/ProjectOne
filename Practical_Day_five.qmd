@@ -1,0 +1,18 @@
+---
+title: "Practical Day four"
+editor: visual
+---
+
+##SetUp
+
+```{r}
+library(tidyverse)
+library(nycflights13)
+```
+
+##Flights dataset
+
+```{r}
+flights_tibble <- as.tibble(flights)
+flights_tibble
+```
