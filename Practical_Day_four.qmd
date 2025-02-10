@@ -13,6 +13,6 @@ library(nycflights13)
 ##Flights dataset
 
 ```{r}
-flights_tibble <- as.tibble(flights)
+flights_tibble <- as_tibble(flights)
 flights_tibble
 ```
