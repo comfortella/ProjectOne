@@ -33,7 +33,7 @@ sd_tmp <- sd(tmp)
 sd_tmp 
 min_tmp <- min(tmp)
 min_tmp
-max_tmp<-max(tmp) 
+max_tmp <-max(tmp) 
 max_tmp
 ```
 
@@ -63,8 +63,8 @@ dist <- cars$dist
 ##Design Matrix and response variable
 
 ```{r}
-X <- cbind(1,speed) 
-Y<-dist
+X <- cbind(1, speed) 
+Y <- dist
 ```
 
 ##Beta Estimate
@@ -72,10 +72,10 @@ Y<-dist
 ```{r}
 #| label: Beta hat
 Xtrans <- t(X) 
-XtransX <- Xtrans %*% X 
-XtransX_inv <- solve(XtransX) 
-XtransY <- Xtrans %*% Y 
-beta_estimate <- XtransX_inv %*% XtransY
+Xtrans_X <- Xtrans %*% X 
+Xtrans_X_inv <- solve(Xtrans_X) 
+Xtrans_Y <- Xtrans %*% Y 
+beta_estimate <- Xtrans_X_inv %*% Xtrans_Y
 beta_estimate
 ```
 

@@ -3,7 +3,7 @@ title: "Prac2"
 editor: visual
 ---
 
-\## Step 1: Generate Simulated Data\
+\## Step 1: Generate Simulated Data
 
 ```{r}
 # Set the seed for reproducibility
@@ -13,4 +13,57 @@ x <- seq(1, 100, by = 1)
 # Generate y as a noisy sine wave: y = sin(x * 10) + e, where e ~ N(0, 0.2^2)
 e <- rnorm(length(x), mean = 0, sd = 0.2) # generate noise
 y <- sin(x * 10) + e # noisy sine wave
+```
+
+##Implementation of the Lowess algorithm\
+
+```{r}
+# Define a function customLowess to implement the LOWESS smoothing
+customLowess <- function(x, y, f) {
+  n <- length(x)
+  smoothed_y <- numeric(n)
+  
+  # For each point in x, calculate the weighted local regression
+  for (i in 1:n) {
+    # Calculate distances from current x_i to all other x values
+    distances <- abs(x - x[i])
+    
+    # Calculate the weights using the tricube kernel
+    dmax <- sort(distances)[ceiling(f * n)] # distance to the furthest neighbor
+    weights <- (1 - (distances / dmax)^3)^3
+    weights[distances > dmax] <- 0  # Set weights of far neighbors to 0
+    
+    # Fit the weighted linear regression (y = beta_0 + beta_1 * x)
+    X <- cbind(1, x)  # Add intercept term
+    W <- diag(weights)  # Diagonal matrix of weights
+    beta <- solve(t(X) %*% W %*% X) %*% t(X) %*% W %*% y
+    
+    # Calculate the smoothed value for y_i
+    smoothed_y[i] <- beta[1] + beta[2] * x[i]
+  }
+  
+  return(smoothed_y)
+}
+
+# Apply customLowess to the data
+f <- 0.1
+smoothed_y_custom <- customLowess(x, y, f)
+
+```
+
+##Compare the build-in lowess and customized
+
+```{r}
+
+smoothed_y_custom
+
+# Use the built-in lowess function to smooth the data
+smoothed_y_builtin <- lowess(x, y, f = f, iter = 0)$y
+smoothed_y_builtin
+
+# Plot both smoothed curves to compare
+plot(x, y, main = "Lowess Smoothing Comparison", xlab = "x", ylab = "y", pch = 16, col = rgb(0, 0, 0, 0.5))
+lines(x, smoothed_y_custom, col = "blue", lwd = 2)  
+lines(x, smoothed_y_builtin, col = "red", lwd = 2)   
+legend("topright", legend = c("Custom LOWESS", "Built-in LOWESS"), col = c("blue", "red"), lwd = 2)
 ```
