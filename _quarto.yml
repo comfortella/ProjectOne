@@ -8,6 +8,7 @@ book:
     - index.qmd
     - Prac_day_1.qmd
     - Practical_Day_four.qmd
+    - Prac2.qmd
     
     
 website: 
@@ -17,4 +18,5 @@ website:
         text: Home
       - href: Practical_Day_four.qmd
         text: Day four
-        
+      - href: Prac2.qmd
+        text: Practical Two
