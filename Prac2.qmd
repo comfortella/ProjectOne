@@ -1,0 +1,16 @@
+---
+title: "Prac2"
+editor: visual
+---
+
+\## Step 1: Generate Simulated Data\
+
+```{r}
+# Set the seed for reproducibility
+set.seed(1)
+# Create x as a sequence of numbers from 1 to 100
+x <- seq(1, 100, by = 1)
+# Generate y as a noisy sine wave: y = sin(x * 10) + e, where e ~ N(0, 0.2^2)
+e <- rnorm(length(x), mean = 0, sd = 0.2) # generate noise
+y <- sin(x * 10) + e # noisy sine wave
+```
